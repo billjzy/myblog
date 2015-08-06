@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title=title
+    link(rel="stylesheet" , href="/stylesheets/style.css")
+    link(rel="stylesheet" , href="/stylesheets/bootstrap.css")
+  body
+  header.navbar.navbar-inverse
+    .container-fluid.col-md-6
+      .navbar-header
+        a#logo.navbar-brand(href='#') NJIT
+
+      ul.nav.navbar-nav
+        li#navs.active Home
+        li#navs Login
+        li#navs Help
+    form.nav.navbar-nav.col-md-3
+      input#q.form-control.span6(type='text', placeholder='search')
+    #start-up.navbar-nav.navbar-right.col-md-2
+      a.btn.btn-primary Login
+      a.btn.btn-success(type='button', href="/register") Sign up
+
+   block content
+
+   
