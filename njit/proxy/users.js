@@ -1,3 +1,4 @@
+//dealing with db ops
 var models = require('../models');
 var User = models.User;
 
@@ -10,7 +11,7 @@ exports.newAndSave = function(email, pass, callback){
   var user    = new User();
   user.email  = email;
   user.pass   = pass;
- 
   user.save(callback);
-
 };
+
+

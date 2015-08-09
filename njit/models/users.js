@@ -12,8 +12,6 @@ var UserSchema = new Schema({
 	major: {type:String},
 
 
-
-
 	topic_count:  {type: Number, default: 0 },
 	reply_count: {type: Number, default: 0},
 	follower_count: {type: Number, default: 0},

@@ -3,10 +3,10 @@ extends layout
 
 block content
   .container
-    if(typeof(msg) != undifined&&msg)
-    .alert.alert-success 
+    if(typeof(msg)!=undifined&&msg) 
+    .alert 
       strong #{msg}
-    form#signin_form.form-horizontal(method='post', action='/register')
+    form#signin_form.form-horizontal(method='post', action='/signin')
       .form-group
         label.col-md-2.control-label(for='username') Email
         .col-md-6
@@ -15,10 +15,7 @@ block content
         label.col-md-2.control-label(for='password') Password
         .col-md-6
           input.form-control#user-password(type='password', name='pass')
-      .form-group
-        label.col-md-2.control-label(for='re-password') Retype-Password
-        .col-md-6
-          input.form-control#re-password(type='password', name='re_pass')
+
       .form-group
         .col-md-offset-2.col-md-3
           .checkbox
@@ -28,4 +25,5 @@ block content
                       
       .form-actions
         .col-md-offset-2
-          button.btn.btn-primary(type='submit', value='signup') Sign up
+          button.btn.btn-primary(type='submit', value='signin') Sign in
+

@@ -17,8 +17,12 @@ html
     form.nav.navbar-nav.col-md-3
       input#q.form-control.span6(type='text', placeholder='search')
     #start-up.navbar-nav.navbar-right.col-md-2
-      a.btn.btn-primary Login
-      a.btn.btn-success(type='button', href="/register") Sign up
+      if(msg) 
+        a(href="/signout") SignOut
+        a(href='#') Settings
+      else
+        a.btn.btn-primary(type='button', href="/signin") Sign in
+        a.btn.btn-success(type='button', href="/register") Sign up
 
    block content
 
