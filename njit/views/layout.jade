@@ -12,12 +12,13 @@ html
 
       ul.nav.navbar-nav
         li#navs.active Home
-        li#navs Login
+        li#navs
+          a(href="/signout") SignOut
         li#navs Help
     form.nav.navbar-nav.col-md-3
       input#q.form-control.span6(type='text', placeholder='search')
     #start-up.navbar-nav.navbar-right.col-md-2
-      if(msg) 
+      if(current_user) 
         a(href="/signout") SignOut
         a(href='#') Settings
       else

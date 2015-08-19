@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var UserModel = require('../models').User;
+var UserModel = mongoose.model('User');
 
 var config = require('../config');
 var eventproxy  = require('eventproxy');
@@ -15,15 +15,15 @@ exports.userRequired = function(req, res, next){
 
 
 //create signedcookie, store user information
-exports.generateSession = function(email,res){
-  var auth_token = email + '$$$$';
+exports.generateSession = function(user, res){
+  var auth_token = user.email + '$$$$';
   var opts = {
-     path: '/',
+     path: '/',  
      maxAge: 3000000000,
-     secure: true,
-     httpOnly: true
+     httpOnly: true,
+     signed: true
   };
-  res.cookie(config.auth_cookie_name, auth_token, opts);
+  res.cookie(config.auth_cookie_name, auth_token, opts);//signedCookie sent to cli
 };
 
 
@@ -31,29 +31,30 @@ exports.generateSession = function(email,res){
 //check if the user is authorized
 // 
 exports.authUser = function(req, res, next){
-   var ep = new eventproxy();
-   ep.fail(next);
-   
-   ep.all('get_user', function(user){
-    if(user){
-      user = res.locals.current_user = req.session.user = new UserModel(user);
-    }
-    ep.done(next);
-   });
+   res.locals.current_user = null;
+   var cb = function(err, user){
+    console.log(user);
+     if(!err) {
+       res.locals.current_user = req.session.user = new UserModel(user);
+      }
+      //console.log(req.session.user);
+      return next();
+   };
 
    //after request recieved
    if(req.session.user) {
-     ep.emit('get_user', req.session.user)
+     cb(null, req.session.user);
    }
-   else {
+   else {    
    	 var auth_token = req.signedCookies[config.auth_cookie_name];
    	 if(!auth_token) {
-   	 	return next();//no user info in session cookie
+   	 	 return next();//no user info in session cookie
    	 }
+     else {
    	 var auth = auth_token.split('$$$$');
-   	 var email = auth[0];
-
-   	 UserProxy.getUserByEmail(email, ep.done('get_user'));
-   }
-
+   	 var e = auth[0]; 
+     UserProxy.getUserByEmail(e, cb);
+     }
+    }
 };
+

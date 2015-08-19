@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var sign = require('../controller/sign');
+var site = require('../controller/site');
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', site.index);
+
+
 
 router.get('/register', sign.showSignup);
 

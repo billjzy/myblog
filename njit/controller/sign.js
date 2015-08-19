@@ -4,6 +4,7 @@ var eventproxy =  require('eventproxy');
 var tools = require('../common/tools'); 
 var authMiddleWare = require('../middlewares/auth');
 var config = require('../config');
+
 exports.showSignup = function(req, res){
   res.render('register');
 }
@@ -30,9 +31,9 @@ exports.signup = function(req, res, next) {
   if(!validator.isEmail(email)) return ep.emit('sign_err', 'illegal email format!');
   if(pass!=repass) return ep.emit('sign_err', 'retype password not match!');
 
-  User.getUserByEmail(email, function(err, users){
+  User.getUserByEmail(email, function(err, user){
   	if(err) return next(err);
-  	if(users.length>0) {
+  	if(user) {
   		ep.emit('sign_err', 'email already exists!');
   		return ;
   	}
@@ -41,9 +42,9 @@ exports.signup = function(req, res, next) {
 	  User.newAndSave(email, passhash, function(err){
 	     if(err) {
 	        return next(err);
-	     }
-    
-	     authMiddleWare.generateSession(email, res);
+	     }   
+	     authMiddleWare.generateSession(users[0], res);
+
 	     res.render('index',{msg:'Sign up successfully, Welcome!'});
 	    });   
 	}));
@@ -52,15 +53,17 @@ exports.signup = function(req, res, next) {
 
 
 exports.showSignin = function(req, res){
-  res.render('signin');
+  if(req.session.user) res.render('index');
+  else {
+  	res.render('signin');
+  }
 };
 
 exports.signin = function(req, res, next){
   var email = validator.trim(req.body.email);
   var pass = validator.trim(req.body.pass);
-
-  ep = new eventproxy();
-  ep.fail(next);
+  
+  var ep = new eventproxy();
   ep.on('signin_err', function(msg){
      res.render('signin',{msg:msg});
   });
@@ -79,17 +82,22 @@ exports.signin = function(req, res, next){
   if(err){
   	return next(err);
   }
-  if(user.length<1){
+  if(!user){
   	return ep.emit('sign_err', 'no user in db');
   }
-
-  var passhash = user[0].pass;
+  
+  var passhash = user.pass;
+  
   tools.bcompare(pass, passhash, ep.done(function(bool){
      if(!bool) {
      	return ep.emit('sign_err', 'wrong email or password');
      }
-     authMiddleWare.generateSession(email, res);
-     res.render('index',{msg:'welcome back!'});
+  
+     authMiddleWare.generateSession(user, res);
+     //user redirect instead of render
+     //because res.bookie is not passed to cli until this 
+     //write res is finished--
+     res.redirect('/');
   }));
  });
 };
@@ -98,5 +106,5 @@ exports.signin = function(req, res, next){
 exports.signout = function(req, res, next){
    req.session.destroy();
    res.clearCookie(config.auth_cookie_name, {path: '/'});
-   res.redirect('index');
+   res.redirect('/');
 };

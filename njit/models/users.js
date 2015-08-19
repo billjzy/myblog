@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-	email: {type:String, unique:true},
+	email: {type:String},
 	pass: {type: String},
 	name: {
 		first: {type: String},
@@ -20,4 +20,6 @@ var UserSchema = new Schema({
 
 
 });
+
+UserSchema.index({email:1}, {unique: true});
 mongoose.model('User', UserSchema);
