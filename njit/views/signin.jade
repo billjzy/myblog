@@ -4,13 +4,13 @@ extends layout
 block content
   .container
     if(typeof(msg)!=undifined&&msg) 
-    .alert 
-      strong #{msg}
+      .alert 
+        strong #{msg}
     form#signin_form.form-horizontal(method='post', action='/signin')
       .form-group
-        label.col-md-2.control-label(for='username') Email
+        label.col-md-2.control-label(for='username') Username
         .col-md-6
-          input.form-control#user-email(type='text', placeholder='Email', name='email')
+          input.form-control#user-email(type='text', placeholder='Username', name='username')
       .form-group
         label.col-md-2.control-label(for='password') Password
         .col-md-6

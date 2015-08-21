@@ -8,7 +8,11 @@ block content
       strong #{msg}
     form#signin_form.form-horizontal(method='post', action='/register')
       .form-group
-        label.col-md-2.control-label(for='username') Email
+        label.col-md-2.control-label(for='username') Username
+        .col-md-6
+          input.form-control#user-email(type='text', placeholder='Username', name='username')
+      .form-group
+        label.col-md-2.control-label(for='email') Email
         .col-md-6
           input.form-control#user-email(type='text', placeholder='Email', name='email')
       .form-group
