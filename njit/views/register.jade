@@ -3,33 +3,29 @@ extends layout
 
 block content
   .container
-    if(typeof(msg) != undifined&&msg)
+  if(typeof(msg) != undifined&&msg)
     .alert.alert-success 
       strong #{msg}
-    form#signin_form.form-horizontal(method='post', action='/register')
-      .form-group
-        label.col-md-2.control-label(for='username') Username
-        .col-md-6
-          input.form-control#user-email(type='text', placeholder='Username', name='username')
-      .form-group
-        label.col-md-2.control-label(for='email') Email
-        .col-md-6
-          input.form-control#user-email(type='text', placeholder='Email', name='email')
-      .form-group
-        label.col-md-2.control-label(for='password') Password
-        .col-md-6
-          input.form-control#user-password(type='password', name='pass')
-      .form-group
-        label.col-md-2.control-label(for='re-password') Retype-Password
-        .col-md-6
-          input.form-control#re-password(type='password', name='re_pass')
-      .form-group
-        .col-md-offset-2.col-md-3
-          .checkbox
-             input(type='checkbox') 
-             label='Remeber me'
+  form#signin_form.form-horizontal(method='post', action='/register')
+    .form-group
+      label.col-md-2.control-label(for='username') Username
+      .col-md-6
+        input.form-control#user-email(type='text', placeholder='Username', name='username')
+    .form-group
+      label.col-md-2.control-label(for='email') Email
+      .col-md-6
+        input.form-control#user-email(type='text', placeholder='Email', name='email')
+    .form-group
+      label.col-md-2.control-label(for='password') Password
+      .col-md-6
+        input.form-control#user-password(type='password', name='pass')
+    .form-group
+      label.col-md-2.control-label(for='re-password') Retype-Password
+      .col-md-6
+        input.form-control#re-password(type='password', name='re_pass')
+  
              
                       
-      .form-actions
-        .col-md-offset-2
-          button.btn.btn-primary(type='submit', value='signup') Sign up
+    .form-actions
+      .col-md-offset-2
+        button.btn.btn-primary(type='submit', value='signup') Sign up
