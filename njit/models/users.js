@@ -13,7 +13,8 @@ var UserSchema = new Schema({
 	},
 	phone: {type: String},
 	major: {type:String},
-
+    
+    address: {type: String},
 
 	topic_count:  {type: Number, default: 0 },
 	reply_count: {type: Number, default: 0},

@@ -6,7 +6,7 @@ var BlogSchema = new Schema({
   title: {type: String},
   content:{type: String},
   author_id:{type: ObjectId},
-
+  
   top:{type: Boolean, default: false},
   good:{type: Boolean, default: false},
   collect_count:{type:Number, default: 0},
@@ -15,7 +15,6 @@ var BlogSchema = new Schema({
   create_at: {type: Date, default: Date.now},
   update_at: {type: Date, default: Date.now}
   
-
 });
 
 BlogSchema.index({create_at: -1});

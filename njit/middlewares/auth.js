@@ -9,8 +9,9 @@ var UserProxy = require('../proxy').User;
 //need login
 exports.userRequired = function(req, res, next){
   if(!req.session||!req.session.user){
-  	return res.status(403).send('forbiden!');
+    return res.status(403).send('forbiden!');
   }
+  next();
 };
 
 

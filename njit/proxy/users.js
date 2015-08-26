@@ -24,6 +24,6 @@ exports.getUserById = function(id, callback){
   	return callback();
   }
   User.findOne({_id: id}, callback);
-}
+};
 
 
