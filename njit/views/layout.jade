@@ -33,12 +33,12 @@ html
                   li
                     a(href='#') Message
                   li 
-                    a(href='') Profile
+                    a(href='/setting') Profile
                   li
                     a(href='') Follow
                   li.divider
                   li
-                  a(href='/signout') Sign Out
+                    a(href='/signout') Sign Out
             else 
               li 
                 a(href="/signin") Sign in
@@ -47,8 +47,6 @@ html
           form.navbar-form(role="search")
             input.form-control(type='text', placeholder='search')
       
-    
-
     block content
 
     script(src="javascripts/jquery.min.js")

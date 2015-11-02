@@ -16,3 +16,4 @@ require('./blogs');
 
 exports.User  =  mongoose.model('User');
 exports.Blog  =  mongoose.model('Blog');
+exports.Reply = mongoose.model('Reply');

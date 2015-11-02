@@ -22,6 +22,7 @@ app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('cookie-parser')(config.session_secret));
 app.use(express.static(path.join(__dirname, '/public')));
+
 app.use(session({
    secret: config.session_secret,
    store: new RedisStore({
@@ -29,7 +30,7 @@ app.use(session({
     host: config.redis_host
    }),
    resave: true,
-  saveUninitialized: true
+   saveUninitialized: true
 }));
 
 app.use(auth.authUser);
@@ -70,8 +71,8 @@ app.use(function(err, req, res, next) {
     });
 });
 
-app.listen(3000, function(){
-    console.log('listening to port 3000!');
+app.listen(8080, function(){
+    console.log('listening to port 8080!');
 });
 
 module.exports = app;

@@ -1,0 +1,60 @@
+extends ../layout.jade
+
+block content
+  .panel
+    .inner
+      if(typeof(error)!=='undefined' && error)
+        .alert.alert-error
+          strong #{error} 
+      if(typeof(success)!=='undifined' && success) 
+        .alert.alert-success
+          strong #{success}
+
+      form#setting_form.form-horizontal(action='/setting', method = 'post')
+        .control-group
+           label.control-label(for='name') Last Name
+           .controls
+             input.input-xlarge(name='last', size='30', type='text', value=typeof(name.last)!=='undefined'? name.last: '')
+        .control-group
+           label.control-label(for='name') First Name
+           .controls
+             input.input-xlarge(name='first', size='30', type='text', value=typeof(name.first)!=='undefined'? name.first: '')
+        .control-group
+           label.control-label(for='name') Email
+           .controls
+             input.input-xlarge.readonly(name = 'email', size='30', type='text', value=typeof(email)!=='undefined'? email: '')
+        .control-group
+           label.control-label(for='name') Phone
+           .controls
+             input.input-xlarge(name = 'phone', size='30', type='text', value=typeof(phone)!=='undefined'?phone:'')
+        .control-group
+           label.control-label(for='name') Major
+           .controls
+             input.input-xlarge(name = 'major', size='30', type='text', value=typeof(major)!=='undefined'? major:'')
+        .control-group
+           label.control-label(for='name') Address
+           .controls
+             input.input-xlarge(name = 'address', size='30', type='text', value=typeof(address)!=='undefined'? address:'')
+
+        input#action(type='hidden', name='action', value='change_setting')
+
+        .form-actions
+          input.span-primary.submit_btn(type='submit',data-loading-text='saving..',value='Update')
+   
+  .panel
+    .inner
+      form#change_pass_form.form-horizontal(action='/setting', method='post')
+        .control-group
+          label.control-label(for='old_pass') Current password
+          .controls
+            input.input-xlarge#old_pass(type='password', name='old_pass', size='30')
+        .control-group
+          label.control-label(for='new_pass') New password
+          .controls
+            input.input-xlarge.new_pass(type='password', name='new_pass', size='30')  
+        input#action(type='hidden', name='action',value='change_password')  
+
+        .form-actions
+          input.span-primary.submit_btn(type='submit', data-loading-text='updating..', value='change_password')                    
+
+
