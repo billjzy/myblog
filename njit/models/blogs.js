@@ -7,12 +7,15 @@ var BlogSchema = new Schema({
   content:{type: String},
   author_id:{type: ObjectId},
   
-  top:{type: Boolean, default: false},
-  good:{type: Boolean, default: false},
+  //top:{type: Boolean, default: false},
+  //good:{type: Boolean, default: false},
+  last_reply:{type: ObjectId},
+  last_reply_at: { type: Date, default: Date.now },
   collect_count:{type:Number, default: 0},
   reply_count: {type: Number, default: 0},
   visit_count:{type: Number, default: 0},
   create_at: {type: Date, default: Date.now},
+  deleted: {type: Boolean, default: false},
   update_at: {type: Date, default: Date.now}
   
 });

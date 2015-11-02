@@ -8,7 +8,8 @@ var ReplySchema = new Schema({
   author_id: {type: ObjectId},
   reply_id: {type: ObjectId},
   create_at:{type: Date, default: Date.now },
-  
+  update_at: { type: Date, default: Date.now },
+  deleted: {type: Boolean, default: false}
 });
 
 ReplySchema.index({blog_id: 1});

@@ -22,7 +22,6 @@ var UserSchema = new Schema({
     following_count: {type: Number, default: 0},
     create_at: { type: Date, default:Date.now}
 
-
 });
 UserSchema.index({username: 1}, {unique: true});
 UserSchema.index({email:1}, {unique: true});

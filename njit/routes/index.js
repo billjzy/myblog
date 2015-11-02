@@ -22,9 +22,9 @@ router.get('/setting', auth.userRequired, user.showProfile);
 
 router.post('/setting', auth.userRequired, user.profile);
 
-router.get('/blog/create', blog.create);//create new blog
+router.get('/blog/create', auth.userRequired, blog.create);//create new blog
 router.get('/blog/:bid', blog.index);//show blog(:bid)
-
+router.get('/blog/edit', auth.userReuquired, blog.edit);
 //post new blog
 //update
 
