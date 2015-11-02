@@ -145,5 +145,12 @@ exports.reduceCount = function(id, callback){
     });
 };
 
-exports.newAndSave = function(){};
+exports.newAndSave = function(title, content, tab, authorId, Callback){
+	var blog = new Blog();
+	blog.title = title;
+	blog.content = content;
+	blog.tab = tab;
+	blog.author_id = authorId,
+	blog.save(callback);
+};
 
